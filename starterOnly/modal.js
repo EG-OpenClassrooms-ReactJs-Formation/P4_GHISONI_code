@@ -39,11 +39,11 @@ function closeModal() {
 }
 
 function validate() {
-  const isEmailValid = emailField.checkValidity();
-  const isFirstNameValide = firstNameField.checkValidity();
-  const isLastNameValide = lastNameField.checkValidity();
-  const isBirthDateValide = birthDateField.checkValidity();
-  const isGeneralConditionValide = generalCondition.checked;
+  var isEmailValid = emailField.checkValidity();
+  var isFirstNameValide = firstNameField.checkValidity();
+  var isLastNameValide = lastNameField.checkValidity();
+  var isBirthDateValide = birthDateField.checkValidity();
+  var isGeneralConditionValide = generalCondition.checked;
   var isOneRadioChecked = false;
   for (var i = 0; i < radios.length; i++) {
       if (radios[i].type === 'radio' && radios[i].checked) {
@@ -53,11 +53,16 @@ function validate() {
   }
 
   if(isEmailValid && isFirstNameValide && isLastNameValide && isBirthDateValide && isOneRadioChecked && isGeneralConditionValide) {
-    console.log("valide")
+    console.log("valide");
+    alert("Merci ! Votre réservation a été reçue.");
     return true;
   }
   else {
-    console.log("invalide")
+    if(isOneRadioChecked === false){
+      
+      alert("Check a radiobutton");
+    }
+    console.log("invalide");
     return false;
   }
   

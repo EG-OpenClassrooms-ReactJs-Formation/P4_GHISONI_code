@@ -270,7 +270,15 @@ input[data-error]::after {
   opacity: 0;
 }
 .checkbox-input {
-  display: none;
+  /*display: none;*/
+  opacity: 1;
+  position: absolute;
+  /* left: 56px;
+  bottom: 196px; */
+  width: 1px;
+  color: #232323;
+  background-color: #232323;
+  border-color: #232323;
 }
 .checkbox-input:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
@@ -527,6 +535,7 @@ footer {
     opacity: 1;
   }
 }
+
 @keyframes modalclose {
   from {
     opacity: 1;
