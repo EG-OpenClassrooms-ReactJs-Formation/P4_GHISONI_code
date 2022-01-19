@@ -270,11 +270,11 @@ input[data-error]::after {
   opacity: 0;
 }
 .checkbox-input {
-  /*display: none;*/
+  display: none;
   opacity: 1;
   position: absolute;
-  /* left: 56px;
-  bottom: 196px; */
+  left: 56px;
+  bottom: 195px;
   width: 1px;
   color: #232323;
   background-color: #232323;
