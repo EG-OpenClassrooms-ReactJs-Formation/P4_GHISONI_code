@@ -14,7 +14,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /*background-image: url("background.png");*/
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -225,6 +225,56 @@ input {
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
+}
+#checkbox-conditions{
+  margin: 0px;
+  
+}
+.custom-error-message{
+  display: none;
+  color: #e54858;
+  padding-top: 0px;
+  margin-top: 0px;
+  font-size: 12px;
+  font-weight: normal;
+  /*margin-bottom: 11px;*/
+}
+#modal-form{
+  display: block;
+  
+}
+#modal-form-overlay{
+  opacity: 1;
+  
+}
+.modal-component-overlay{
+  display: none;
+}
+#modal-form-overlay-text{
+  position: absolute;
+  /*display: none;*/
+  top: 45%;
+  left: 0; 
+  right: 0; 
+  margin:auto;
+  text-align: center;
+  width: 300px;
+}
+#modal-form-close-button{
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  background: #fe142f;
+  max-width: 235px;
+  margin: 0 auto;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+
 }
 /* 
 input[data-error]::after {

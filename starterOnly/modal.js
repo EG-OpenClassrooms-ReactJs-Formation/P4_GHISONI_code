@@ -18,6 +18,7 @@ const firstNameField = document.getElementById("first");
 const lastNameField = document.getElementById("last");
 const emailField = document.getElementById("email");
 const birthDateField = document.getElementById("birthdate");
+const tournamentField = document.getElementById("quantity");
 const formSubmitButton = document.getElementsByClassName("btn-submit");
 const radios = document.getElementsByClassName('checkbox-input');
 const generalCondition = document.getElementById('checkbox1');
@@ -29,6 +30,9 @@ const generalCondition = document.getElementById('checkbox1');
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // close modal event
 crossBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+// close modal event for close button
+document.getElementById("modal-form-close-button").addEventListener("click", closeModal);
+
 //formSubmitButton.forEach((btn) => btn.addEventListener("click", validate));
 
 // launch modal form
@@ -40,9 +44,29 @@ function launchModal() {
 function closeModal() {
   clearForm();
   modalbg.style.display = "none";
+  hideOverlay();
   
 }
 
+document.addEventListener('invalid', (function(){
+  return function(e) {
+    //prevent the browser from showing default error bubble / hint
+    e.preventDefault();
+    
+    // optionally fire off some custom validation handler
+    // myValidation();
+  };
+})(), true);
+
+document.addEventListener('submit', (function(){
+  return function(e) {
+    //prevent the browser from showing default error bubble / hint
+    e.preventDefault();
+    
+    // optionally fire off some custom validation handler
+    // myValidation();
+  };
+})(), true);
 
 function clearForm() {
 
@@ -55,12 +79,49 @@ function clearForm() {
 
 }
 
+function clearErrorIndicators(){
+  console.log("Clear error");
+  document.getElementsByClassName("formData")[5].style.border = "0";
+  document.getElementsByClassName("formData")[6].style.border = "0";
+}
+function displayOverlay(){
+  console.log("display modal");
+  //document.getElementsByClassName("modal-component-overlay").style.display= 'block';
+  const components = document.querySelectorAll('.modal-component-overlay');
+  components.forEach(component => {
+    component.style.display= 'block';
+  });
+  document.getElementById("modal-form-overlay").style.opacity = 0;
+}
+function hideOverlay(){
+  console.log("hide modal");
+  //document.getElementsByClassName("modal-component-overlay").style.display= 'block';
+  const components = document.querySelectorAll('.modal-component-overlay');
+  components.forEach(component => {
+    component.style.display= 'none';
+  });
+  document.getElementById("modal-form-overlay").style.opacity = 1;
+}
+
+function showErrorMessage(validated, id){
+  if(validated === false){
+    console.log(id + " invalide");
+    
+    document.getElementById(id).style.display = "block";
+  }
+  else{
+    console.log(id  + " valide");
+    document.getElementById(id).style.display = "none";
+  }
+}
+
 function validate() {
-  var isEmailValid = emailField.checkValidity();
-  var isFirstNameValide = firstNameField.checkValidity();
   
+  var isFirstNameValide = firstNameField.checkValidity();
   var isLastNameValide = lastNameField.checkValidity();
+  var isEmailValid = emailField.checkValidity();
   var isBirthDateValide = birthDateField.checkValidity();
+  var isTournamentValide = tournamentField.checkValidity();
   var isGeneralConditionValide = generalCondition.checked;
   var isOneRadioChecked = false;
 
@@ -73,19 +134,34 @@ function validate() {
       }
   }
 
-  if(isEmailValid && isFirstNameValide && isLastNameValide && isBirthDateValide && isOneRadioChecked && isGeneralConditionValide) {
+  if(isEmailValid && isFirstNameValide && isLastNameValide && isBirthDateValide && isTournamentValide && isOneRadioChecked && isGeneralConditionValide) {
     console.log("valide");
-    alert("Merci ! Votre réservation a été reçue.");
+    clearErrorIndicators();
+    displayOverlay();
     return true;
   }
   else {
+    
+    showErrorMessage(isFirstNameValide, "custom-error-prenom");
+    showErrorMessage(isLastNameValide, "custom-error-nom");
+    showErrorMessage(isEmailValid, "custom-error-email");
+    showErrorMessage(isBirthDateValide, "custom-error-birthdate");
+    showErrorMessage(isTournamentValide, "custom-error-tournament");
+    showErrorMessage(isGeneralConditionValide, "custom-error-message-condition");
+    
+    // Handle the radio error messages
+    
     if(isOneRadioChecked === false){
+      // If no radio button is checked
       document.getElementsByClassName("formData")[5].style.border = "2px solid #e54858";
-      //alert("Check a radiobutton");
+      document.getElementById("custom-error-message-city").style.display = "block";
     }
-    else{
+    else {
       document.getElementsByClassName("formData")[5].style.border = "0";
+      document.getElementById("custom-error-message-city").style.display = "none";
     }
+    
+    
     //document.getElementsByClassName("formData")[5].style.border = "none";
     console.log("invalide");
     return false;
