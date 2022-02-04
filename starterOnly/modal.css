@@ -233,8 +233,9 @@ input {
 .custom-error-message{
   display: none;
   color: #e54858;
-  padding-top: 0px;
+  padding-top: 5px;
   margin-top: 0px;
+  padding-left: 0;
   font-size: 12px;
   font-weight: normal;
   /*margin-bottom: 11px;*/

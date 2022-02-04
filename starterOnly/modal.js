@@ -54,7 +54,7 @@ document.addEventListener('invalid', (function(){
     e.preventDefault();
     
     // optionally fire off some custom validation handler
-    // myValidation();
+    
   };
 })(), true);
 
@@ -70,19 +70,49 @@ document.addEventListener('submit', (function(){
 
 function clearForm() {
 
+  // Returns in the initial state the differents fields
   firstNameField.value = firstNameField.defaultValue;
   lastNameField.value = lastNameField.defaultValue;
   emailField.value = emailField.defaultValue;
   birthDateField.value = birthDateField.defaultValue;
-  //radios.value = radios.defaultValue;
+  tournamentField.value = tournamentField.defaultValue;
   generalCondition.value = generalCondition.defaultValue;
 
+  // Clear radios button check
+  document.querySelectorAll('.checkbox-input').forEach(component => {
+    component.checked = false;
+  });
+  
+  
+
+}
+
+function showErrorMessage(validated, id){
+  if(validated === false){
+    console.log(id + " invalide");
+    
+    document.getElementById(id).style.display = "block";
+  }
+  else{
+    console.log(id  + " valide");
+    document.getElementById(id).style.display = "none";
+  }
 }
 
 function clearErrorIndicators(){
   console.log("Clear error");
+  // Clear for check box
   document.getElementsByClassName("formData")[5].style.border = "0";
+  document.getElementById("custom-error-message-city").style.display = "none";
   document.getElementsByClassName("formData")[6].style.border = "0";
+  
+  showErrorMessage(true, "custom-error-prenom");
+  showErrorMessage(true, "custom-error-nom");
+  showErrorMessage(true, "custom-error-email");
+  showErrorMessage(true, "custom-error-birthdate");
+  showErrorMessage(true, "custom-error-tournament");
+  showErrorMessage(true, "custom-error-message-condition");
+  
 }
 function displayOverlay(){
   console.log("display modal");
@@ -101,18 +131,6 @@ function hideOverlay(){
     component.style.display= 'none';
   });
   document.getElementById("modal-form-overlay").style.opacity = 1;
-}
-
-function showErrorMessage(validated, id){
-  if(validated === false){
-    console.log(id + " invalide");
-    
-    document.getElementById(id).style.display = "block";
-  }
-  else{
-    console.log(id  + " valide");
-    document.getElementById(id).style.display = "none";
-  }
 }
 
 function validate() {
