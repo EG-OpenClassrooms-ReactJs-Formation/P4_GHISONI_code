@@ -114,6 +114,7 @@ function clearErrorIndicators(){
   showErrorMessage(true, "custom-error-message-condition");
   
 }
+
 function displayOverlay(){
   console.log("display modal");
   //document.getElementsByClassName("modal-component-overlay").style.display= 'block';
@@ -144,7 +145,7 @@ function validate() {
   var isOneRadioChecked = false;
 
 
-  console.log(isFirstNameValide);
+  
   for (var i = 0; i < radios.length; i++) {
       if (radios[i].type === 'radio' && radios[i].checked) {
           // get value, set checked flag or do whatever you need to
@@ -155,6 +156,13 @@ function validate() {
   if(isEmailValid && isFirstNameValide && isLastNameValide && isBirthDateValide && isTournamentValide && isOneRadioChecked && isGeneralConditionValide) {
     console.log("valide");
     clearErrorIndicators();
+    console.log(firstNameField.value);
+    console.log(lastNameField.value);
+    console.log(emailField.value);
+    console.log(birthDateField.value);
+    console.log(tournamentField.value);
+    console.log(generalCondition.checked);
+    console.log(isOneRadioChecked);
     displayOverlay();
     return true;
   }
